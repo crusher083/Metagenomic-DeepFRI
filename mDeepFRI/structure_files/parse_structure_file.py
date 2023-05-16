@@ -7,7 +7,6 @@ import traceback
 import numpy as np
 
 from mDeepFRI import ATOMS, SEQUENCES
-from mDeepFRI.CPP_lib import libAtomDistanceIO  # type: ignore[attr-defined]
 from mDeepFRI.CPP_lib.parsers import parse_mmcif, parse_pdb
 from mDeepFRI.utils import bio_utils
 
@@ -78,9 +77,9 @@ def read_structure_file(file_path: pathlib.Path) -> SeqAtoms:
     for pattern, structure_parsing_func in PARSERS.items():
         if file_path.name.endswith(pattern):
             if file_path.name.endswith('.gz'):
-                f = gzip.open(file_path, 'rt')
+                f = gzip.open(file_path, 'r')
             else:
-                f = open(file_path, 'r')
+                f = open(file_path, 'rb')
             atom_amino_group, positions, groups = structure_parsing_func(f)
             f.close()
 
@@ -143,6 +142,8 @@ def save_sequence_and_atoms(seq_atoms: SeqAtoms, sequence_path: pathlib.Path,
     with open(sequence_path, "w", encoding="utf-8") as f:
         f.write(f">{seq_atoms.protein_id}\n{sequence}\n")
 
+    raise NotImplementedError("TODO: implement saving atoms")
+    # ruff: noqa
     libAtomDistanceIO.save_atoms(seq_atoms.positions, group_indexes,
                                  str(atoms_path))
 

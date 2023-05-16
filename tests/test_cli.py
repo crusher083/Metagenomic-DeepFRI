@@ -11,13 +11,13 @@ def runner():
 
 # test click cli
 def test_cli_help(runner):
-    result = runner.invoke(cli.main, ["--help"])
+    result = runner.invoke(cli.cli, ["--help"])
     assert result.exit_code == 0
     assert "--help" in result.output
 
 
 def test_cli_build_db(runner):
-    result = runner.invoke(cli.main, ["build-db", "--help"])
+    result = runner.invoke(cli.cli, ["build-db", "--help"])
     assert result.exit_code == 0
     assert "--help" in result.output
     assert "-m" in result.output
@@ -25,14 +25,14 @@ def test_cli_build_db(runner):
 
 
 def test_cli_get_models(runner):
-    result = runner.invoke(cli.main, ["get-models", "--help"])
+    result = runner.invoke(cli.cli, ["get-models", "--help"])
     assert result.exit_code == 0
     assert "--help" in result.output
     assert "-o" in result.output
 
 
 def test_cli_predict_function(runner):
-    result = runner.invoke(cli.main, ["predict-function", "--help"])
+    result = runner.invoke(cli.cli, ["predict-function", "--help"])
     assert result.exit_code == 0
     assert "--help" in result.output
     assert "-i" in result.output

@@ -9,7 +9,6 @@ from typing import List
 import numpy as np
 
 from mDeepFRI import SEQ_ATOMS_DATASET_PATH
-from mDeepFRI.CPP_lib import libAtomDistanceIO  # type: ignore[attr-defined]
 from mDeepFRI.structure_files.parse_structure_file import (
     process_structure_file, search_structure_files)
 from mDeepFRI.utils.mmseqs import create_target_database
@@ -80,7 +79,6 @@ def build_database(
 
     # actual processing of structure files takes place here
     logger.info("Processing %s files", len(structure_files_paths))
-    libAtomDistanceIO.initialize()
     with multiprocessing.Pool(processes=threads) as p:
         processing_status = p.starmap(
             process_structure_file,

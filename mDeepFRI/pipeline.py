@@ -7,7 +7,6 @@ from typing import List, Tuple
 from pysam.libcfaidx import FastxFile
 
 from mDeepFRI import ATOMS, SEQ_ATOMS_DATASET_PATH, TARGET_MMSEQS_DB_NAME
-from mDeepFRI.CPP_lib import libAtomDistanceIO  # type: ignore[attr-defined]
 from mDeepFRI.predict import Predictor
 from mDeepFRI.utils.fasta_file_io import SeqFileLoader
 from mDeepFRI.utils.mmseqs import run_mmseqs_search
@@ -214,7 +213,6 @@ def metagenomic_deepfri(query_file: pathlib.Path, database: pathlib.Path,
 
     unaligned_queries = query_seqs.keys() - alignments.keys()
 
-    libAtomDistanceIO.initialize()
     deepfri_models_config = load_deepfri_config(model_config_json)
 
     # deepfri_processing_modes = ['mf', 'bp', 'cc', 'ec']
@@ -240,7 +238,12 @@ def metagenomic_deepfri(query_file: pathlib.Path, database: pathlib.Path,
                 query_seq = query_seqs[query_id]
                 target_id = alignment["target_id"]
 
-                generated_query_contact_map = libAtomDistanceIO.load_aligned_contact_map(
+                raise NotImplementedError(
+                    "This part is not implemented yet. "
+                    "It will be implemented in the next release.")
+                # ruff: noqa
+                generated_query_contact_map = \
+                    libAtomDistanceIO.load_aligned_contact_map(
                     str(database / SEQ_ATOMS_DATASET_PATH / ATOMS /
                         (target_id + ".bin")),
                     angstrom_contact_threshold,

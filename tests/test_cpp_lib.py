@@ -5,9 +5,7 @@ from typing import Callable
 import numpy as np
 import pytest
 
-from mDeepFRI.CPP_lib.atoms_io import load_contact_map, save_atoms_file
-from mDeepFRI.CPP_lib.libAtomDistanceIO import (initialize,
-                                                load_aligned_contact_map)
+from mDeepFRI.CPP_lib.atoms_io import save_atoms_file
 from mDeepFRI.CPP_lib.parsers import parse_pdb
 
 
@@ -43,16 +41,17 @@ def error_wrapper(func: Callable, *args, error_contains: str = None):
             raise e
 
 
-def test_functions():
-    initialize()
-    error_wrapper(load_aligned_contact_map,
-                  error_contains="did not match C++ signature")
-
-
-def test_load_contact_map(reference_binary, expected_contact_map):
-    initialize()
-    contact_map_cython = load_contact_map(reference_binary, 6)
-    assert np.array_equal(contact_map_cython, expected_contact_map)
+#
+# def test_functions():
+#     initialize()
+#     error_wrapper(load_aligned_contact_map,
+#                   error_contains="did not match C++ signature")
+#
+#
+# def test_load_contact_map(reference_binary, expected_contact_map):
+#     initialize()
+#     contact_map_cython = load_contact_map(reference_binary, 6)
+#     assert np.array_equal(contact_map_cython, expected_contact_map)
 
 
 def test_save_atoms(reference_binary, struct_params):

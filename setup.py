@@ -75,7 +75,7 @@ setup(
     include_package_data=True,
     entry_points={
         "console_scripts": [
-            "mDeepFRI = mDeepFRI.cli:main",
+            "mDeepFRI = mDeepFRI.cli:cli",
         ],
     },
     ext_modules=EXTENSIONS,
