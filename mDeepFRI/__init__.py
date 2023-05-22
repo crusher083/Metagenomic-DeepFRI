@@ -2,9 +2,9 @@ import os
 
 __version__ = "2.0.0"
 
-repo_link = "https://huggingface.co/crusher083/mDeepFRI/resolve/main"
+REPO_LINK = "https://huggingface.co/crusher083/mDeepFRI/resolve/main"
 
-model_names = [
+MODEL_NAMES = [
     "DeepCNN-MERGED_bp.onnx",
     "DeepCNN-MERGED_cc.onnx",
     "DeepCNN-MERGED_mf.onnx",
@@ -15,11 +15,11 @@ model_names = [
     "DeepFRI-MERGED_GraphConv_gcd_512-512-512_fcd_1024_ca_10.0_mf.onnx",
 ]
 
-model_links = [
-    os.path.join(repo_link, model_name) for model_name in model_names
+MODEL_LINKS = [
+    os.path.join(REPO_LINK, model_name) for model_name in MODEL_NAMES
 ]
 
-config_names = [
+CONFIG_NAMES = [
     "DeepCNN-MERGED_bp_model_params.json",
     "DeepCNN-MERGED_cc_model_params.json",
     "DeepCNN-MERGED_mf_model_params.json",
@@ -31,8 +31,8 @@ config_names = [
     "model_config.json"
 ]
 
-config_links = [
-    os.path.join(repo_link, config_name) for config_name in config_names
+CONFIG_LIST = [
+    os.path.join(REPO_LINK, config_name) for config_name in CONFIG_NAMES
 ]
 
 TARGET_MMSEQS_DB_NAME = "targetDB"

@@ -8,7 +8,7 @@ import sys
 
 import requests
 
-from mDeepFRI import config_links, model_links
+from mDeepFRI import CONFIG_LIST, MODEL_LINKS
 
 
 def run_command(command, timeout=-1):
@@ -47,13 +47,13 @@ def download_file(url, path):
 
 def download_model_weights(output_path: pathlib.Path):
 
-    total_len = len(model_links)
-    for i, model_link in enumerate(model_links):
+    total_len = len(MODEL_LINKS)
+    for i, model_link in enumerate(MODEL_LINKS):
         download_file(model_link, output_path / model_link.split("/")[-1])
         logging.debug("Downloading model weights... %s/%s", i + 1, total_len)
 
-    total_len = len(config_links)
-    for i, config in enumerate(config_links):
+    total_len = len(CONFIG_LIST)
+    for i, config in enumerate(CONFIG_LIST):
         download_file(config, output_path / config.split("/")[-1])
         logging.debug("Downloading model configs... %s/%s", i + 1, total_len)
 
